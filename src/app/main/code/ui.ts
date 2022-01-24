@@ -51,7 +51,7 @@ export const page = (body: string) => `
   <html>
     <head>
       <meta charset="utf-8" />
-      <title>Timestamp Service</title>
+      <title>URL Shortener Service</title>
       <style>${style()}</style>
     </head>
     ${body}
@@ -73,6 +73,7 @@ export const homePage = () =>
       <form method="post" action="http://localhost:8000/api/shorturl">
        <label for="url">URL</label>
         <input id="url" type="text" />
+        <input type="submit" value="POST URL" />
       </form>
     </div>
 
