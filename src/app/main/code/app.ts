@@ -1,57 +1,35 @@
 import {
   cors,
+  dirname,
+  join,
   json,
   opine,
-  ReasonPhrases,
-  Router,
-  StatusCodes,
+  renderFileToString,
+  serveStatic,
   urlencoded,
 } from "../../../deps/prod.ts";
+import { eHandler } from "./middleware.ts";
 import config from "./config.ts";
-import { eCat, eHandler } from "./middleware.ts";
-import { getUrl, URLMeta } from "./models.ts";
-import { homePage } from "./ui.ts";
-import { URLs } from "./utils.ts";
+import controller from "./controller.ts";
 import { logger } from "./utils.ts";
 
-const router = Router();
-
-router.get(URLs.INDEX, (_, res) => {
-  res.send(homePage());
-});
-
-router.get(
-  URLs.GET_SHORT_URL,
-  eCat((req, res) => {
-    const { short_url } = req.params;
-    const urlMeta = getUrl(short_url);
-    if (!urlMeta) {
-      res.redirect(URLs.WILD);
-    }
-    res.send(urlMeta);
-  }),
-);
-
-router.post(
-  URLs.POST_SHORT_URL,
-  eCat((req, res) => {
-    console.log(req.body);
-    const url: string = req.body;
-    const urlMeta = new URLMeta(url);
-    res.send(urlMeta);
-  }),
-);
-
-router.get(URLs.WILD, (_, res) => {
-  res.status = StatusCodes.NOT_FOUND;
-  res.send(ReasonPhrases.NOT_FOUND);
-});
-
+const _dirname = dirname(import.meta.url);
 const app = opine();
-app.use(cors());
+
+// view engine setup
+app.set("views", join(_dirname, "ui/views"));
+app.set("view engine", "ejs");
+app.engine("ejs", renderFileToString);
+
+// serve static assets
+app.use(serveStatic(join(_dirname, "ui/assets")));
+
+// handle different types of post data
 app.use(json());
 app.use(urlencoded());
-app.use(router);
+
+app.use(cors());
+app.use(controller);
 app.use(eHandler);
 
 export default app;
