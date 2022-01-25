@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/app.css" />
+    <meta charset="utf-8" />
+    <title>URL Shortener Service</title>
+    <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %>!</p>
+    <header class="flex-col-aiC">
+      <h1>URL Shortener Microservice</h1>
+    </header>
+
+    <div class="flex-col-aiC">
+      <h2>Short Url Creation</h2>
+      <span>Example: POST [project_url]/api/shorturl - https://www.google.com</snap>
+
+      <form method="post" action="http://localhost:8000/api/shorturl">
+        <fieldset id="url-fieldset">
+          <legend>URL Shortener</legend>
+          <div class="flex-row-jcC">
+            <label for="url">URL</label>
+            <input id="url" type="text" />
+            <input type="button" onclick="submitURL()" value="POST URL" />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="flex-col-aiC">
+      <h2>Example Output:</h2>
+      <span class="example">{ "unix": 1451001600000, "utc": "Fri, 25 Dec 2015 00:00:00 GMT" }</span>
+      <span>By <a href="https://github.com/PatMan10" target="_blank" rel="noopener noreferrer">PatMan10</a></span>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>

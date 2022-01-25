@@ -1,13 +1,12 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { eCat } from "./middleware.ts";
 import { getUrl, URLMeta } from "./models.ts";
-import { homePage } from "./ui.ts";
 import { URLs } from "./utils.ts";
 
 const router = Router();
 
 router.get(URLs.INDEX, (_, res) => {
-  res.render("index", { title: "URL Shortener Service" });
+  res.render("index");
 });
 
 router.get(
