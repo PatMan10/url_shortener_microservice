@@ -1,14 +1,16 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { eCat } from "./middleware.ts";
-import { getUrl, URLMeta } from "./models.ts";
+import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
 import { URLs } from "./utils.ts";
 import config from "./config.ts";
 
 const router = Router();
 
 router.get(URLs.INDEX, (_, res) => {
-  const exampleShortUrl = config.BASE_URL.concat("/api/1");
-  const exampleLongUrl = "https://somesuperduperlongurl.co.za";
+  const exampleShortUrl = config.BASE_URL.concat(
+    URLs.getShortUrl(exampleUrlMeta.short_url.toString()),
+  );
+  const exampleLongUrl = exampleUrlMeta.original_url;
   res.render("index", { exampleShortUrl, exampleLongUrl });
 });
 
@@ -16,20 +18,21 @@ router.get(
   URLs.GET_SHORT_URL,
   eCat((req, res) => {
     const { short_url } = req.params;
-    const urlMeta = getUrl(short_url);
+    const urlMeta = getUrl(Number(short_url));
     if (!urlMeta) {
       res.redirect(URLs.WILD);
+    } else {
+      res.redirect(urlMeta.original_url);
     }
-    res.send(urlMeta);
   }),
 );
 
 router.post(
   URLs.POST_SHORT_URL,
   eCat((req, res) => {
-    console.log(req.body);
-    const url: string = req.body;
+    const { url } = req.parsedBody;
     const urlMeta = new URLMeta(url);
+    addUrl(urlMeta);
     res.send(urlMeta);
   }),
 );

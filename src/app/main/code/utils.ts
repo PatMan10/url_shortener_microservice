@@ -10,6 +10,8 @@ export class URLs {
   static readonly POST_SHORT_URL = `/api/shorturl`;
   static readonly getShortUrl = (url?: string) =>
     URLs.GET_SHORT_URL.replace(URLPlaceHolder.SHORT_URL, url || "");
+  static readonly GitHubRepo =
+    `https://github.com/PatMan10/url_shortener_microservice`;
 }
 
 export class ErrorMessages {

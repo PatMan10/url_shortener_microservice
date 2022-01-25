@@ -38,7 +38,7 @@ form {
   width: 80%;
 }
 
-input[id="url"] {
+input[id="url-input"] {
   height: 25px;
   width: 250px;
   text-align: center;

@@ -15,16 +15,16 @@
       <h2>Short Url Creation</h2>
       <span class="mb-4">Example: POST [project_url]/api/shorturl - https://www.google.com</span>
 
-      <form method="post" action="http://localhost:8000/api/shorturl">
+      <!-- <form method="post" action="http://localhost:8000/api/shorturl"> -->
+      <form id="url-form" >
         <fieldset class="url-fieldset">
           <legend>URL Shortener</legend>
           <div class="flex-row-aiC flex-jcSE">
             <label for="url">URL</label>
-            <input id="url" type="text" placeholder="https://freecodecamp.org/" />
+            <input id="url-input" type="text" placeholder="https://freecodecamp.org/" />
             <input 
               id="submit"
-              type="button" 
-              onclick="submitURL()" 
+              type="submit" 
               value="POST URL" 
               />
           </div>

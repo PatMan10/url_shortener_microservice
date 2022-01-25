@@ -28,6 +28,7 @@ export const eHandler = (
   res: OpineResponse,
   _next: NextFunction,
 ) => {
+  logger.error(error);
   if (error.message === ErrorMessages.INVALID_URL) {
     res.status = StatusCodes.BAD_REQUEST;
     res.send({ error: error.message });
