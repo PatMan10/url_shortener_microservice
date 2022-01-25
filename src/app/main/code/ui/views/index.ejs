@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>URL Shortener Service</title>
+    <link rel="stylesheet" href="kickstart.css" />
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
@@ -10,27 +11,44 @@
       <h1>URL Shortener Microservice</h1>
     </header>
 
-    <div class="flex-col-aiC">
+    <div class="flex-col-aiC mb-4">
       <h2>Short Url Creation</h2>
-      <span>Example: POST [project_url]/api/shorturl - https://www.google.com</snap>
+      <span class="mb-4">Example: POST [project_url]/api/shorturl - https://www.google.com</span>
 
       <form method="post" action="http://localhost:8000/api/shorturl">
-        <fieldset id="url-fieldset">
+        <fieldset class="url-fieldset">
           <legend>URL Shortener</legend>
-          <div class="flex-row-jcC">
+          <div class="flex-row-aiC flex-jcSE">
             <label for="url">URL</label>
-            <input id="url" type="text" />
-            <input type="button" onclick="submitURL()" value="POST URL" />
+            <input id="url" type="text" placeholder="https://freecodecamp.org/" />
+            <input 
+              id="submit"
+              type="button" 
+              onclick="submitURL()" 
+              value="POST URL" 
+              />
           </div>
         </fieldset>
       </form>
     </div>
 
-    <div class="flex-col-aiC">
-      <h2>Example Output:</h2>
-      <span class="example">{ "unix": 1451001600000, "utc": "Fri, 25 Dec 2015 00:00:00 GMT" }</span>
-      <span>By <a href="https://github.com/PatMan10" target="_blank" rel="noopener noreferrer">PatMan10</a></span>
+    <div class="flex-col-aiC mb-4">
+      <h2>Example Usage:</h2>
+      <span class="mb-4">
+        <a 
+          href="<%= exampleLongUrl %>"
+          target="_blank"
+          rel="noopener noreferrer">
+          <%= exampleShortUrl %>
+        </a>
+      </span>
+      <h3 class="mb-3">Will Redirect To:</h3>
+      <span><a><%= exampleLongUrl %></a></span>
     </div>
+
+    <footer>
+      <span>By <a href="https://github.com/PatMan10" target="_blank" rel="noopener noreferrer">PatMan10</a></span>
+    </footer>
 
     <script src="app.js"></script>
   </body>

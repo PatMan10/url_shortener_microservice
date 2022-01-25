@@ -2,11 +2,14 @@ import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { eCat } from "./middleware.ts";
 import { getUrl, URLMeta } from "./models.ts";
 import { URLs } from "./utils.ts";
+import config from "./config.ts";
 
 const router = Router();
 
 router.get(URLs.INDEX, (_, res) => {
-  res.render("index");
+  const exampleShortUrl = config.BASE_URL.concat("/api/1");
+  const exampleLongUrl = "https://somesuperduperlongurl.co.za";
+  res.render("index", { exampleShortUrl, exampleLongUrl });
 });
 
 router.get(
