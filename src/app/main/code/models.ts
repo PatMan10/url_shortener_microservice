@@ -9,7 +9,7 @@ export class URLMeta {
   }
 }
 
-export const exampleUrlMeta = new URLMeta(URLs.GitHubRepo);
+export const exampleUrlMeta = new URLMeta(URLs.GITHUB_REPO);
 const urls: Map<number, URLMeta> = new Map();
 urls.set(exampleUrlMeta.short_url, exampleUrlMeta);
 

@@ -10,7 +10,7 @@ export class URLs {
   static readonly POST_SHORT_URL = `/api/shorturl`;
   static readonly getShortUrl = (url?: string) =>
     URLs.GET_SHORT_URL.replace(URLPlaceHolder.SHORT_URL, url || "");
-  static readonly GitHubRepo =
+  static readonly GITHUB_REPO =
     `https://github.com/PatMan10/url_shortener_microservice`;
 }
 
@@ -18,6 +18,7 @@ export class ErrorMessages {
   static readonly INTERNAL_SERVER_ERROR =
     "Uh oh, some unexpected error ocurred...";
   static readonly INVALID_URL = "invalid url";
+  static readonly INVALID_SHORT_URL = "invalid short url";
 }
 
 // logger

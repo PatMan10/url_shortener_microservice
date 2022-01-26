@@ -1,7 +1,7 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { eCat } from "./middleware.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
-import { URLs } from "./utils.ts";
+import { ErrorMessages, URLs } from "./utils.ts";
 import config from "./config.ts";
 
 const router = Router();
@@ -18,21 +18,40 @@ router.get(
   URLs.GET_SHORT_URL,
   eCat((req, res) => {
     const { short_url } = req.params;
-    const urlMeta = getUrl(Number(short_url));
-    if (!urlMeta) {
-      res.redirect(URLs.WILD);
-    } else {
-      res.redirect(urlMeta.original_url);
+    // 400 invalid short url
+    if (!/\d+/g.test(short_url)) {
+      res.status = StatusCodes.BAD_REQUEST;
+      res.send({ error: ErrorMessages.INVALID_SHORT_URL });
+      return;
     }
+
+    const urlMeta = getUrl(Number(short_url));
+    // 404 short url not found
+    if (!urlMeta) {
+      res.status = StatusCodes.NOT_FOUND;
+      res.send({ error: ReasonPhrases.NOT_FOUND });
+      return;
+    }
+
+    // 200 success
+    res.send(urlMeta);
+    res.redirect(urlMeta.original_url);
   }),
 );
 
 router.post(
   URLs.POST_SHORT_URL,
   eCat((req, res) => {
-    const { url } = req.parsedBody;
+    console.log(req.parsedBody);
+    const url = req.parsedBody;
+    if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
+      res.status = StatusCodes.BAD_REQUEST;
+      res.send({ error: ErrorMessages.INVALID_URL });
+      return;
+    }
     const urlMeta = new URLMeta(url);
     addUrl(urlMeta);
+    res.status = StatusCodes.CREATED;
     res.send(urlMeta);
   }),
 );

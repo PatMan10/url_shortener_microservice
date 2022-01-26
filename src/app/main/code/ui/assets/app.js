@@ -3,13 +3,15 @@ const urlInput = document.getElementById("url-input");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const data = JSON.stringify({ url: urlInput.value });
+  const url = urlInput.value;
+  console.log(url);
   const res = await fetch("http://localhost:8000/api/shorturl", {
     headers: {
-      "content-type": "application/json",
+      "content-type": "text/html",
+      "charset": "utf-8",
     },
     method: "POST",
-    body: data,
+    body: url,
   });
   console.log(await res.text());
 });
