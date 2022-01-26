@@ -6,7 +6,7 @@ form.addEventListener("submit", async (e) => {
   const url = urlInput.value;
   const res = await fetch("http://localhost:8000/api/shorturl", {
     headers: {
-      "content-type": "text/html",
+      "content-type": "application/json",
       "charset": "utf-8",
     },
     method: "POST",
