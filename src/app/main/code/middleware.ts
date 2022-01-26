@@ -29,11 +29,6 @@ export const eHandler = (
   _next: NextFunction,
 ) => {
   logger.error(error);
-  if (error.message === ErrorMessages.INVALID_URL) {
-    res.status = StatusCodes.BAD_REQUEST;
-    res.send({ error: error.message });
-  } else {
-    res.status = StatusCodes.INTERNAL_SERVER_ERROR;
-    res.send({ error: ErrorMessages.INTERNAL_SERVER_ERROR });
-  }
+  res.status = StatusCodes.INTERNAL_SERVER_ERROR;
+  res.send(error);
 };
