@@ -9,11 +9,13 @@ import {
   urlencoded,
 } from "../../../deps/prod.ts";
 import { eHandler } from "./middleware.ts";
-import config from "./config.ts";
+import config, { Env } from "./config.ts";
 import controller from "./controller.ts";
 import { logger } from "./utils.ts";
 
-const _dirname = dirname(import.meta.url);
+const _dirname = dirname(import.meta.url).substring(
+  config.ENV === Env.PROD ? 4 : 0,
+);
 const app = opine();
 
 // view engine setup
