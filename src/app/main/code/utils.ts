@@ -1,6 +1,6 @@
 // urls
 export enum URLPlaceHolder {
-  SHORT_URL = ":short_url?",
+  SHORT_URL = ":short_url",
 }
 
 export class URLs {

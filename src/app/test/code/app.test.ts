@@ -21,8 +21,7 @@ Rhum.testPlan(
     });
 
     Rhum.testSuite(`---------- GET ${URLs.GET_SHORT_URL} ----------`, () => {
-      const exec = async (shotUrl?: string) =>
-        await superD.get(URLs.getShortUrl(shotUrl));
+      const exec = (shotUrl?: string) => superD.get(URLs.getShortUrl(shotUrl));
 
       Rhum.testCase("400 invalid short url, return error\n", async () => {
         const res = await exec("asd");
@@ -47,6 +46,29 @@ Rhum.testPlan(
         assertEquals(res.status, StatusCodes.OK);
         assertEquals(urlMeta.short_url, 0);
         assertEquals(urlMeta.original_url, URLs.GITHUB_REPO);
+      });
+    });
+
+    Rhum.testSuite(`---------- POST ${URLs.POST_SHORT_URL} ----------`, () => {
+      const exec = (url?: string) =>
+        superD.post(URLs.POST_SHORT_URL).send({ url });
+
+      Rhum.testCase("400 invalid short url, return error\n", async () => {
+        const res = await exec("asd");
+        const { error } = res.body;
+
+        assertEquals(res.status, StatusCodes.BAD_REQUEST);
+        assertEquals(error, ErrorMessages.INVALID_URL);
+      });
+
+      Rhum.testCase("200 success, return url meta\n", async () => {
+        const postUrl = "https://duckduckgo.com";
+        const res = await exec(postUrl);
+        const urlMeta: URLMeta = res.body;
+
+        assertEquals(res.status, StatusCodes.CREATED);
+        assertEquals(urlMeta.short_url, 1);
+        assertEquals(urlMeta.original_url, postUrl);
       });
     });
   },

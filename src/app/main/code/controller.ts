@@ -42,8 +42,8 @@ router.get(
 router.post(
   URLs.POST_SHORT_URL,
   eCat((req, res) => {
-    console.log(req.parsedBody);
-    const url = req.parsedBody;
+    const { url } = req.parsedBody;
+    // 400 invalid url
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
       res.status = StatusCodes.BAD_REQUEST;
       res.send({ error: ErrorMessages.INVALID_URL });
