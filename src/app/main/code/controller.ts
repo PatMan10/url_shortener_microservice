@@ -1,8 +1,9 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { eCat } from "./middleware.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
-import { ErrorMessages, URLs } from "./utils.ts";
+import { ErrorMessages, logger, URLs } from "./utils.ts";
 import config from "./config.ts";
+import { IndexPage } from "./ui.ts";
 
 const router = Router();
 
@@ -11,10 +12,10 @@ router.get(URLs.INDEX, (_, res) => {
     URLs.getShortUrl(String(exampleUrlMeta.short_url));
   const exampleLongUrl = exampleUrlMeta.original_url;
 
-  res.render("index", {
+  res.send(IndexPage({
     exampleShortUrl,
     exampleLongUrl,
-  });
+  }));
 });
 
 router.get(
@@ -44,6 +45,9 @@ router.get(
 router.post(
   URLs.POST_SHORT_URL,
   eCat((req, res) => {
+    logger.info(`content-type => ${req.headers.get("content-type")}`);
+    logger.info(`body =>`, req.parsedBody);
+
     const { url } = req.parsedBody;
     // 400 invalid url
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {

@@ -2,19 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2438fe8d-29ce-49fa-b4fc-96ae984fcb08" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/client/assets/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/kickstart.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/client/assets/kickstart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/client/views/index.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/ui/assets/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/ui/assets/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/ui/assets/kickstart.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/kickstart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/ui/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/client/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/code/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/code/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/test/code/app.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/test/code/app.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/deps/dev.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/deps/dev.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/deps/prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/deps/prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/code/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/code/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/test/code/app.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/code/app.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/main/code" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
@@ -54,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1644090787888</updated>
-      <workItem from="1644090787889" duration="5900000" />
+      <workItem from="1644090787889" duration="7546000" />
     </task>
     <servers />
   </component>
