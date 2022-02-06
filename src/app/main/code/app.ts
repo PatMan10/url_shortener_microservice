@@ -5,6 +5,10 @@ import controller from "./controller.ts";
 import { logger } from "./utils.ts";
 
 const app = opine();
+app.use((req, _, next) => {
+  logger.info(req.headers.get("content-type"));
+  next();
+});
 
 // handle different types of post data
 app.use(json());
