@@ -7,11 +7,14 @@ import config from "./config.ts";
 const router = Router();
 
 router.get(URLs.INDEX, (_, res) => {
-  const exampleShortUrl = config.BASE_URL.concat(
-    URLs.getShortUrl(exampleUrlMeta.short_url.toString()),
-  );
+  const exampleShortUrl = config.BASE_URL +
+    URLs.getShortUrl(String(exampleUrlMeta.short_url));
   const exampleLongUrl = exampleUrlMeta.original_url;
-  res.render("index", { exampleShortUrl, exampleLongUrl });
+
+  res.render("index", {
+    exampleShortUrl,
+    exampleLongUrl,
+  });
 });
 
 router.get(
@@ -34,7 +37,6 @@ router.get(
     }
 
     // 200 success
-    res.send(urlMeta);
     res.redirect(urlMeta.original_url);
   }),
 );

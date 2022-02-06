@@ -1,5 +1,9 @@
 // deno std lib
-export { dirname, join } from "https://deno.land/std@0.122.0/path/mod.ts";
+export {
+  dirname,
+  join,
+  resolve,
+} from "https://deno.land/std@0.122.0/path/mod.ts";
 // opine web server
 export * from "https://deno.land/x/opine@2.0.2/mod.ts";
 // https status codes

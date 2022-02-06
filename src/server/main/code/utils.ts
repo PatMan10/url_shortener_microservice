@@ -6,10 +6,13 @@ export enum URLPlaceHolder {
 export class URLs {
   static readonly WILD = "*";
   static readonly INDEX = "/";
+
   static readonly GET_SHORT_URL = `/api/shorturl/${URLPlaceHolder.SHORT_URL}`;
   static readonly POST_SHORT_URL = `/api/shorturl`;
+
   static readonly getShortUrl = (url?: string) =>
     URLs.GET_SHORT_URL.replace(URLPlaceHolder.SHORT_URL, url || "");
+
   static readonly GITHUB_REPO =
     `https://github.com/PatMan10/url_shortener_microservice`;
 }

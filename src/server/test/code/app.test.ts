@@ -39,13 +39,9 @@ Rhum.testPlan(
         assertEquals(error, ReasonPhrases.NOT_FOUND);
       });
 
-      Rhum.testCase("200 success, return url meta\n", async () => {
+      Rhum.testCase("200 success, redirect to original url\n", async () => {
         const res = await exec("0");
-        const urlMeta: URLMeta = res.body;
-
-        assertEquals(res.status, StatusCodes.OK);
-        assertEquals(urlMeta.short_url, 0);
-        assertEquals(urlMeta.original_url, URLs.GITHUB_REPO);
+        assertEquals(res.status, StatusCodes.MOVED_TEMPORARILY);
       });
     });
 
