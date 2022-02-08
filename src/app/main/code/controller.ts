@@ -50,6 +50,7 @@ controller.post(
     const url = (contentType === "application/x-www-form-urlencoded")
       ? (body as URLSearchParams).get("url") as string
       : body.url;
+    logger.info(`URL =>`, url);
 
     // 400 invalid url
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
