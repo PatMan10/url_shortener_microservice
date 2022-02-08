@@ -1,6 +1,6 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
-import { ErrorMessages, logger, URLs } from "./utils.ts";
+import { ErrorMessages, logger, URLs, validURL } from "./utils.ts";
 import config from "./config.ts";
 import { IndexPage } from "./ui.ts";
 
@@ -52,7 +52,7 @@ controller.post(
       : body.url;
     logger.info(`URL =>`, url);
     // 400 invalid url
-    if (!/^(http|https):\/\/*+$/.test(url)) {
+    if (!validURL.test(url)) {
       ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
       ctx.response.body = { error: ErrorMessages.INVALID_URL };
       return;
