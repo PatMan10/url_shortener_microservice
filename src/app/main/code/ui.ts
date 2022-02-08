@@ -83,39 +83,41 @@ export const IndexPage = (props: IndexPageProps) => `
       <h1>URL Shortener Microservice</h1>
     </header>
 
-    <div id="form-container" class="flex-col-aiC mb-4">
-      <h2>Short Url Creation</h2>
-      <span class="mb-4">Example: POST [project_url]/api/shorturl - https://www.google.com</span>
+    <main>
+      <div id="form-container" class="flex-col-aiC mb-4">
+        <h2>Short Url Creation</h2>
+        <span class="mb-4">Example: POST [project_url]/api/shorturl - https://www.google.com</span>
 
-      <form action="api/shorturl" method="post">
-        <fieldset class="url-fieldset">
-          <legend>URL Shortener</legend>
-          <div class="flex-row-aiC flex-jcSE">
-            <label for="url-input">URL</label>
-            <input id="url-input" name="url" type="text" placeholder="https://freecodecamp.org/" />
-            <input 
-              id="submit"
-              type="submit" 
-              value="POST URL" 
-              />
-          </div>
-        </fieldset>
-      </form>
-    </div>
+        <form action="api/shorturl" method="post">
+          <fieldset class="url-fieldset">
+            <legend>URL Shortener</legend>
+            <div class="flex-row-aiC flex-jcSE">
+              <label for="url-input">URL</label>
+              <input id="url-input" name="url" type="text" placeholder="https://freecodecamp.org/" />
+              <input 
+                id="submit"
+                type="submit" 
+                value="POST URL" 
+                />
+            </div>
+          </fieldset>
+        </form>
+      </div>
 
-    <div class="flex-col-aiC mb-4">
-      <h2>Example Usage:</h2>
-      <span class="mb-4">
-        <a 
-          href="${props.exampleLongUrl}"
-          target="_blank"
-          rel="noopener noreferrer">
-          ${props.exampleShortUrl}
-        </a>
-      </span>
-      <h3 class="mb-3">Will Redirect To:</h3>
-      <span><a>${props.exampleLongUrl}</a></span>
-    </div>
+      <div class="flex-col-aiC mb-4">
+        <h2>Example Usage:</h2>
+        <span class="mb-4">
+          <a 
+            href="${props.exampleLongUrl}"
+            target="_blank"
+            rel="noopener noreferrer">
+            ${props.exampleShortUrl}
+          </a>
+        </span>
+        <h3 class="mb-3">Will Redirect To:</h3>
+        <span><a>${props.exampleLongUrl}</a></span>
+      </div>
+    </main>
 
     <footer>
       <span>

@@ -1,70 +1,66 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
-import { eCat } from "./middleware.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
 import { ErrorMessages, logger, URLs } from "./utils.ts";
 import config from "./config.ts";
 import { IndexPage } from "./ui.ts";
 
-const router = Router();
+const controller = new Router();
 
-router.get(URLs.INDEX, (_, res) => {
+controller.get(URLs.INDEX, (ctx) => {
   const exampleShortUrl = config.BASE_URL +
     URLs.getShortUrl(String(exampleUrlMeta.short_url));
   const exampleLongUrl = exampleUrlMeta.original_url;
 
-  res.send(IndexPage({
+  ctx.response.headers.set("content-type", "text/html");
+  ctx.response.body = IndexPage({
     exampleShortUrl,
     exampleLongUrl,
-  }));
+  });
 });
 
-router.get(
+controller.get(
   URLs.GET_SHORT_URL,
-  eCat((req, res) => {
-    const { short_url } = req.params;
+  (ctx) => {
+    const { short_url } = ctx.params;
     // 400 invalid short url
     if (!/\d+/g.test(short_url)) {
-      res.status = StatusCodes.BAD_REQUEST;
-      res.send({ error: ErrorMessages.INVALID_SHORT_URL });
+      ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
+      ctx.response.body = { error: ErrorMessages.INVALID_SHORT_URL };
       return;
     }
 
     const urlMeta = getUrl(Number(short_url));
     // 404 short url not found
     if (!urlMeta) {
-      res.status = StatusCodes.NOT_FOUND;
-      res.send({ error: ReasonPhrases.NOT_FOUND });
+      ctx.response.status = StatusCodes.NOT_FOUND.valueOf();
+      ctx.response.body = { error: ReasonPhrases.NOT_FOUND };
       return;
     }
 
     // 200 success
-    res.redirect(urlMeta.original_url);
-  }),
+    ctx.response.redirect(urlMeta.original_url);
+  },
 );
 
-router.post(
+controller.post(
   URLs.POST_SHORT_URL,
-  eCat((req, res) => {
-    logger.info(`content-type => ${req.headers.get("content-type")}`);
-    logger.info(`body =>`, req.parsedBody);
+  async (ctx) => {
+    const body = await ctx.request.body().value;
+    logger.info(`content-type => ${ctx.request.headers.get("content-type")}`);
+    logger.info(`body =>`, body);
 
-    const { url } = req.parsedBody;
+    const { url } = body;
     // 400 invalid url
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
-      res.status = StatusCodes.BAD_REQUEST;
-      res.send({ error: ErrorMessages.INVALID_URL });
+      ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
+      ctx.response.body = { error: ErrorMessages.INVALID_URL };
       return;
     }
     const urlMeta = new URLMeta(url);
     addUrl(urlMeta);
-    res.status = StatusCodes.CREATED;
-    res.send(urlMeta);
-  }),
+    ctx.response.status = StatusCodes.CREATED.valueOf();
+    ctx.response.body = urlMeta;
+  },
 );
 
-router.get(URLs.WILD, (_, res) => {
-  res.status = StatusCodes.NOT_FOUND;
-  res.send(ReasonPhrases.NOT_FOUND);
-});
-
-export default router;
+export default controller;

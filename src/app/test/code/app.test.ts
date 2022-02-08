@@ -1,27 +1,20 @@
 import { ReasonPhrases, StatusCodes } from "../../../deps/prod.ts";
-import { Rhum, SuperDeno, superdeno } from "../../../deps/dev.ts";
+import { Rhum, superoak } from "../../../deps/dev.ts";
 import app from "../../main/code/app.ts";
 import { ErrorMessages, URLs } from "../../main/code/utils.ts";
 import { URLMeta } from "../../main/code/models.ts";
 
-const { assertEquals, assertExists } = Rhum.asserts;
+const { assertEquals } = Rhum.asserts;
 
 const title = "*-*-*-*-*-*-*-*-*-*- Timestamp Service *-*-*-*-*-*-*-*-*-*-";
 Rhum.testPlan(
   title,
   () => {
     console.log(title);
-    let superD: SuperDeno;
-
-    Rhum.beforeAll(() => {
-      superD = superdeno(app);
-    });
-
-    Rhum.afterAll(() => {
-    });
 
     Rhum.testSuite(`---------- GET ${URLs.GET_SHORT_URL} ----------`, () => {
-      const exec = (shotUrl?: string) => superD.get(URLs.getShortUrl(shotUrl));
+      const exec = async (shotUrl?: string) =>
+        (await superoak(app)).get(URLs.getShortUrl(shotUrl));
 
       Rhum.testCase("400 invalid short url, return error\n", async () => {
         const res = await exec("asd");
@@ -46,8 +39,8 @@ Rhum.testPlan(
     });
 
     Rhum.testSuite(`---------- POST ${URLs.POST_SHORT_URL} ----------`, () => {
-      const exec = (url?: string) =>
-        superD.post(URLs.POST_SHORT_URL).send({ url });
+      const exec = async (url?: string) =>
+        (await superoak(app)).post(URLs.POST_SHORT_URL).send({ url });
 
       Rhum.testCase("400 invalid short url, return error\n", async () => {
         const res = await exec("asd");

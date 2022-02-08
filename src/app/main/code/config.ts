@@ -1,6 +1,6 @@
 import { logger } from "./utils.ts";
 
-export enum EnvKeys {
+export enum EnvKey {
   ENV = "URL_SHORTENER_SERVICE_ENV",
   PORT = "URL_SHORTENER_SERVICE_PORT",
 }
@@ -11,7 +11,7 @@ export enum Env {
 }
 
 const env = ((): Env => {
-  switch (Deno.env.get(EnvKeys.ENV)) {
+  switch (Deno.env.get(EnvKey.ENV)) {
     case Env.PROD:
       return Env.PROD;
 
@@ -20,7 +20,7 @@ const env = ((): Env => {
   }
 })();
 
-const port = Number(Deno.env.get(EnvKeys.PORT)).valueOf() || 8000;
+const port = Number(Deno.env.get(EnvKey.PORT)) || 8000;
 
 export class Config {
   constructor(

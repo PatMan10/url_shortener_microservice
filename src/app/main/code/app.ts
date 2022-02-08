@@ -1,28 +1,25 @@
-import { cors, json, opine, urlencoded } from "../../../deps/prod.ts";
-import { eHandler } from "./middleware.ts";
-import config from "./config.ts";
+import { Application, cors } from "../../../deps/prod.ts";
+import { errorHandler, notFound, reqLogger, reqTimer } from "./middleware.ts";
 import controller from "./controller.ts";
+import config from "./config.ts";
 import { logger } from "./utils.ts";
 
-const app = opine();
-app.use((req, _, next) => {
-  logger.info(req.headers.get("content-type"));
-  next();
-});
+const app = new Application();
 
-// handle different types of post data
-app.use(json());
-app.use(urlencoded());
-
+app.use(errorHandler);
+app.use(reqLogger);
+app.use(reqTimer);
 app.use(cors());
-app.use(controller);
-app.use(eHandler);
+app.use(controller.routes());
+app.use(controller.allowedMethods());
+app.use(notFound);
 
 export default app;
 
 if (import.meta.main) {
-  app.listen(config.PORT, () => {
+  app.addEventListener("listen", () => {
     logger.info(`timestamp service running...`);
     config.display();
   });
+  app.listen({ port: config.PORT });
 }

@@ -36,4 +36,5 @@ class Logger {
     console.error(...data);
   }
 }
+
 export const logger = new Logger();
