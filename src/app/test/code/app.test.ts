@@ -6,7 +6,7 @@ import { URLMeta } from "../../main/code/models.ts";
 
 const { assertEquals } = Rhum.asserts;
 
-const title = "*-*-*-*-*-*-*-*-*-*- Timestamp Service *-*-*-*-*-*-*-*-*-*-";
+const title = "*-*-*-*-*-*-*-*-*-*- URL Shortener Service *-*-*-*-*-*-*-*-*-*-";
 Rhum.testPlan(
   title,
   () => {

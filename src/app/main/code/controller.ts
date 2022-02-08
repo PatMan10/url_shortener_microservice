@@ -45,11 +45,12 @@ controller.get(
 controller.post(
   URLs.POST_SHORT_URL,
   async (ctx) => {
+    const contentType = ctx.request.headers.get("content-type");
     const body = await ctx.request.body().value;
-    logger.info(`content-type => ${ctx.request.headers.get("content-type")}`);
-    logger.info(`body =>`, body);
+    const url = (contentType === "application/x-www-form-urlencoded")
+      ? (body as URLSearchParams).get("url") as string
+      : body.url;
 
-    const { url } = body;
     // 400 invalid url
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
       ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();

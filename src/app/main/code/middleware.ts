@@ -9,8 +9,10 @@ export async function reqLogger(
   next: NextFun,
 ) {
   await next();
-  const rt = ctx.response.headers.get("X-Response-Time");
-  logger.info(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+  const rt = ctx.response.headers.get("x-response-time");
+  logger.info(
+    `${ctx.request.method} ${ctx.request.url} ${ctx.response.status} - ${rt}`,
+  );
 }
 
 export async function reqTimer(
@@ -20,7 +22,7 @@ export async function reqTimer(
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
-  ctx.response.headers.set("X-Response-Time", `${ms}ms`);
+  ctx.response.headers.set("x-response-time", `${ms}ms`);
 }
 
 export async function errorHandler(
