@@ -52,7 +52,7 @@ controller.post(
       : body.url;
     logger.info(`URL =>`, url);
     // 400 invalid url
-    if (!/^(http|https):\/\/[^ "]+$/.test(url)) {
+    if (!/^(http|https):\/\/*+$/.test(url)) {
       ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
       ctx.response.body = { error: ErrorMessages.INVALID_URL };
       return;
