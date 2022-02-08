@@ -50,7 +50,7 @@ Rhum.testPlan(
         assertEquals(error, ErrorMessages.INVALID_URL);
       });
 
-      Rhum.testCase("200 success, return url meta\n", async () => {
+      Rhum.testCase("201 success, return url meta\n", async () => {
         const postUrl = "https://duckduckgo.com";
         const res = await exec(postUrl);
         const urlMeta: URLMeta = res.body;
