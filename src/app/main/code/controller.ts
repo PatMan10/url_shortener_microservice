@@ -51,6 +51,7 @@ controller.post(
       ? (body as URLSearchParams).get("url") as string
       : body.url;
     logger.info(`URL =>`, url);
+
     // 400 invalid url
     if (!validURL.test(url)) {
       ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
