@@ -43,7 +43,7 @@ Rhum.testPlan(
         (await superoak(app)).post(URLs.POST_SHORT_URL).send({ url });
 
       Rhum.testCase("400 invalid short url, return error\n", async () => {
-        const res = await exec("asd");
+        const res = await exec("ftp:/john-doe.org");
         const { error } = res.body;
 
         assertEquals(res.status, StatusCodes.BAD_REQUEST);
