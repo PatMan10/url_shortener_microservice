@@ -54,7 +54,7 @@ controller.post(
 
     // 400 invalid url
     if (!validURL.test(url)) {
-      ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
+      //ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
       ctx.response.body = { error: ErrorMessages.INVALID_URL };
       return;
     }
