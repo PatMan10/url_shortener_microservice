@@ -1,6 +1,12 @@
 import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
-import { ErrorMessages, logger, URLs, validURL } from "./utils.ts";
+import {
+  ErrorMessages,
+  logger,
+  URLs,
+  validLongURL,
+  validShortURL,
+} from "./utils.ts";
 import config from "./config.ts";
 import { IndexPage } from "./ui.ts";
 
@@ -23,7 +29,7 @@ controller.get(
   (ctx) => {
     const { short_url } = ctx.params;
     // 400 invalid short url
-    if (!/\d+/g.test(short_url)) {
+    if (!validShortURL.test(short_url)) {
       ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
       ctx.response.body = { error: ErrorMessages.INVALID_SHORT_URL };
       return;
@@ -50,14 +56,15 @@ controller.post(
     const url = (contentType === "application/x-www-form-urlencoded")
       ? (body as URLSearchParams).get("url") as string
       : body.url;
-    logger.info(`URL =>`, url);
 
     // 400 invalid url
-    if (!validURL.test(url)) {
+    if (!validLongURL.test(url)) {
       //ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();
       ctx.response.body = { error: ErrorMessages.INVALID_URL };
       return;
     }
+
+    // 201 success
     const urlMeta = new URLMeta(url);
     addUrl(urlMeta);
     ctx.response.status = StatusCodes.CREATED.valueOf();

@@ -17,7 +17,7 @@ Rhum.testPlan(
         (await superoak(app)).get(URLs.getShortUrl(shotUrl));
 
       Rhum.testCase("400 invalid short url, return error\n", async () => {
-        const res = await exec("asd");
+        const res = await exec("-1");
         const { error } = res.body;
 
         assertEquals(res.status, StatusCodes.BAD_REQUEST);
@@ -25,7 +25,7 @@ Rhum.testPlan(
       });
 
       Rhum.testCase("404 short url not found\n", async () => {
-        const res = await exec("-1");
+        const res = await exec("99");
         const { error } = res.body;
 
         assertEquals(res.status, StatusCodes.NOT_FOUND);
