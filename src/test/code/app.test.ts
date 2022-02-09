@@ -1,5 +1,4 @@
-import { ReasonPhrases, StatusCodes } from "../../../deps/prod.ts";
-import { Rhum, superoak } from "../../../deps/dev.ts";
+import { ReasonPhrases, Rhum, StatusCodes, superoak } from "../../deps.ts";
 import app from "../../main/code/app.ts";
 import { ErrorMessages, URLs } from "../../main/code/utils.ts";
 import { URLMeta } from "../../main/code/models.ts";

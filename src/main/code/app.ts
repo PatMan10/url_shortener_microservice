@@ -1,4 +1,4 @@
-import { Application, cors } from "../../../deps/prod.ts";
+import { Application, cors } from "../../deps.ts";
 import { errorHandler, notFound, reqLogger, reqTimer } from "./middleware.ts";
 import controller from "./controller.ts";
 import config from "./config.ts";

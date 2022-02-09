@@ -1,4 +1,4 @@
-import { ReasonPhrases, Router, StatusCodes } from "../../../deps/prod.ts";
+import { ReasonPhrases, Router, StatusCodes } from "../../deps.ts";
 import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
 import { ErrorMessages, URLs, validLongURL, validShortURL } from "./utils.ts";
 import config from "./config.ts";

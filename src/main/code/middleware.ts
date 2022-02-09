@@ -1,4 +1,4 @@
-import { Context, ReasonPhrases, StatusCodes } from "../../../deps/prod.ts";
+import { Context, ReasonPhrases, StatusCodes } from "../../deps.ts";
 import { ErrorMessages, logger } from "./utils.ts";
 
 type MiddlewareContext = Context<Record<string, any>, Record<string, any>>;
