@@ -3,6 +3,7 @@ import { addUrl, exampleUrlMeta, getUrl, URLMeta } from "./models.ts";
 import { ErrorMessages, URLs, validLongURL, validShortURL } from "./utils.ts";
 import config from "./config.ts";
 import { IndexPage } from "./ui.ts";
+import { parseBody } from "./middleware.ts";
 
 const controller = new Router();
 
@@ -45,12 +46,7 @@ controller.get(
 controller.post(
   URLs.POST_SHORT_URL,
   async (ctx) => {
-    const contentType = ctx.request.headers.get("content-type");
-    const body = await ctx.request.body().value;
-    const url = (contentType === "application/x-www-form-urlencoded")
-      ? (body as URLSearchParams).get("url") as string
-      : body.url;
-
+    const { url } = await parseBody(ctx);
     // 400 invalid url
     if (!validLongURL.test(url)) {
       //ctx.response.status = StatusCodes.BAD_REQUEST.valueOf();

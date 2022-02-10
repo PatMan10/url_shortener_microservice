@@ -4,6 +4,25 @@ import { ErrorMessages, logger } from "./utils.ts";
 type MiddlewareContext = Context<Record<string, any>, Record<string, any>>;
 type NextFun = () => Promise<unknown>;
 
+export async function parseBody(ctx: MiddlewareContext) {
+  const contentType: string = ctx.request.headers.get("content-type") || "";
+  const body = await ctx.request.body().value;
+
+  switch (contentType) {
+    case "application/x-www-form-urlencoded": {
+      const data = (body as URLSearchParams);
+      const json: any = {};
+      data.forEach((v, k) => {
+        json[k] = v;
+      });
+      return json;
+    }
+
+    default:
+      return body;
+  }
+}
+
 export async function reqLogger(
   ctx: MiddlewareContext,
   next: NextFun,
